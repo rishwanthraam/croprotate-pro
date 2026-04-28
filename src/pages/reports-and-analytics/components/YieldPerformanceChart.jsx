@@ -30,45 +30,50 @@ const YieldPerformanceChart = ({ data, isLoading }) => {
         <Icon name="TrendingUp" size={20} className="text-success" />
       </div>
 
-      <div className="w-full h-80" aria-label="Yield Performance Bar Chart">
+      <div className="w-full h-64" aria-label="Yield Performance Bar Chart">
         <ResponsiveContainer width="100%" height="100%">
-          <BarChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+          <BarChart data={data} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-            <XAxis 
-              dataKey="field" 
+            <XAxis
+              dataKey="field"
               stroke="var(--color-muted-foreground)"
-              fontSize={12}
+              fontSize={10}
+              tickLine={false}
+              angle={-20}
+              textAnchor="end"
+              height={50}
             />
-            <YAxis 
+            <YAxis
               stroke="var(--color-muted-foreground)"
-              fontSize={12}
-              label={{ value: 'Yield (tons/acre)', angle: -90, position: 'insideLeft' }}
+              fontSize={10}
+              tickLine={false}
+              width={40}
             />
-            <Tooltip 
+            <Tooltip
               contentStyle={{
                 backgroundColor: 'var(--color-popover)',
                 border: '1px solid var(--color-border)',
                 borderRadius: '8px',
-                fontSize: '12px'
+                fontSize: '11px'
               }}
             />
-            <Legend />
-            <Bar 
-              dataKey="currentYear" 
-              fill="var(--color-primary)" 
+            <Legend wrapperStyle={{ fontSize: '10px', paddingTop: '10px' }} />
+            <Bar
+              dataKey="currentYear"
+              fill="var(--color-primary)"
               name="2024 Yield"
               radius={[4, 4, 0, 0]}
             />
-            <Bar 
-              dataKey="previousYear" 
-              fill="var(--color-secondary)" 
+            <Bar
+              dataKey="previousYear"
+              fill="var(--color-secondary)"
               name="2023 Yield"
               radius={[4, 4, 0, 0]}
             />
-            <Bar 
-              dataKey="target" 
-              fill="var(--color-accent)" 
-              name="Target Yield"
+            <Bar
+              dataKey="target"
+              fill="var(--color-accent)"
+              name="Target"
               radius={[4, 4, 0, 0]}
             />
           </BarChart>

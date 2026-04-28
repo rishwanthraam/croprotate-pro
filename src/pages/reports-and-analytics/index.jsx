@@ -347,51 +347,50 @@ const ReportsAndAnalytics = () => {
             />
           </div>
 
-          {/* Main Content Grid */}
-          <div className="grid grid-cols-1 xl:grid-cols-2 gap-8 mb-8">
-            {/* Charts Section */}
-            <div className="space-y-8">
-              <YieldPerformanceChart 
-                data={yieldData}
-                isLoading={isLoading}
-              />
-              
-              <SoilHealthTrends 
-                data={soilHealthData}
-                isLoading={isLoading}
-              />
-            </div>
+          {/* Charts Section */}
+          <div className="mb-8">
+            <YieldPerformanceChart
+              data={yieldData}
+              isLoading={isLoading}
+            />
+          </div>
 
-            <div className="space-y-8">
-              <RotationEffectivenessMetrics 
-                data={rotationEffectivenessData}
-                isLoading={isLoading}
-              />
-              
-              <FinancialImpactAnalysis 
-                data={financialData}
-                isLoading={isLoading}
-                totalRevenue={totalRevenue}
-                totalCosts={totalCosts}
-                netProfit={netProfit}
-              />
-            </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+            <SoilHealthTrends
+              data={soilHealthData}
+              isLoading={isLoading}
+            />
+
+            <RotationEffectivenessMetrics
+              data={rotationEffectivenessData}
+              isLoading={isLoading}
+            />
+          </div>
+
+          <div className="mb-8">
+            <FinancialImpactAnalysis
+              data={financialData}
+              isLoading={isLoading}
+              totalRevenue={totalRevenue}
+              totalCosts={totalCosts}
+              netProfit={netProfit}
+            />
           </div>
 
           {/* Tools Section */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 mb-8">
-            <ExportOptions 
+          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6 mb-8">
+            <ExportOptions
               onExport={handleExport}
               isExporting={isExporting}
             />
-            
-            <ComparisonTools 
+
+            <ComparisonTools
               onCompare={handleCompare}
               fields={fields}
               rotationStrategies={rotationStrategies}
             />
-            
-            <ReportHistory 
+
+            <ReportHistory
               reports={reportHistory}
               onDownload={handleReportDownload}
               onDelete={handleReportDelete}
@@ -401,44 +400,44 @@ const ReportsAndAnalytics = () => {
 
           {/* Summary Statistics */}
           <div className="bg-card border border-border rounded-lg p-6">
-            <div className="flex items-center space-x-2 mb-4">
+            <div className="flex items-center space-x-2 mb-6">
               <Icon name="BarChart3" size={20} className="text-primary" />
               <h3 className="font-heading font-semibold text-lg text-foreground">
                 Performance Summary
               </h3>
             </div>
-            
-            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-6 gap-4">
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
               <div className="text-center p-4 bg-muted/30 rounded-lg">
-                <div className="font-data font-bold text-xl text-foreground">176</div>
-                <div className="text-xs text-muted-foreground">Total Fields</div>
+                <div className="font-data font-bold text-2xl text-foreground">176</div>
+                <div className="text-xs text-muted-foreground mt-1">Total Fields</div>
               </div>
-              
+
               <div className="text-center p-4 bg-muted/30 rounded-lg">
-                <div className="font-data font-bold text-xl text-success">92%</div>
-                <div className="text-xs text-muted-foreground">Avg Efficiency</div>
+                <div className="font-data font-bold text-2xl text-success">92%</div>
+                <div className="text-xs text-muted-foreground mt-1">Avg Efficiency</div>
               </div>
-              
+
               <div className="text-center p-4 bg-muted/30 rounded-lg">
-                <div className="font-data font-bold text-xl text-foreground">
+                <div className="font-data font-bold text-2xl text-foreground">
                   ${(netProfit / 1000)?.toFixed(0)}K
                 </div>
-                <div className="text-xs text-muted-foreground">Net Profit</div>
+                <div className="text-xs text-muted-foreground mt-1">Net Profit</div>
               </div>
-              
+
               <div className="text-center p-4 bg-muted/30 rounded-lg">
-                <div className="font-data font-bold text-xl text-primary">7.2</div>
-                <div className="text-xs text-muted-foreground">Avg Soil pH</div>
+                <div className="font-data font-bold text-2xl text-primary">7.2</div>
+                <div className="text-xs text-muted-foreground mt-1">Avg Soil pH</div>
               </div>
-              
+
               <div className="text-center p-4 bg-muted/30 rounded-lg">
-                <div className="font-data font-bold text-xl text-warning">24</div>
-                <div className="text-xs text-muted-foreground">Reports Generated</div>
+                <div className="font-data font-bold text-2xl text-warning">24</div>
+                <div className="text-xs text-muted-foreground mt-1">Reports Generated</div>
               </div>
-              
+
               <div className="text-center p-4 bg-muted/30 rounded-lg">
-                <div className="font-data font-bold text-xl text-success">98%</div>
-                <div className="text-xs text-muted-foreground">Data Accuracy</div>
+                <div className="font-data font-bold text-2xl text-success">98%</div>
+                <div className="text-xs text-muted-foreground mt-1">Data Accuracy</div>
               </div>
             </div>
           </div>
