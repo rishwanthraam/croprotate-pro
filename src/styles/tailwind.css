@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Core Colors */
+    --color-background: #FAFAF9; /* warm off-white */
+    --color-foreground: #1A1A1A; /* near-black */
+    --color-border: #E5E7EB; /* light gray */
+    --color-input: #FFFFFF; /* pure white */
+    --color-ring: #2D5A27; /* deep forest green */
+
+    /* Card Colors */
+    --color-card: #FFFFFF; /* pure white */
+    --color-card-foreground: #1A1A1A; /* near-black */
+
+    /* Popover Colors */
+    --color-popover: #FFFFFF; /* pure white */
+    --color-popover-foreground: #1A1A1A; /* near-black */
+
+    /* Muted Colors */
+    --color-muted: #F9FAFB; /* gray-50 */
+    --color-muted-foreground: #6B7280; /* medium gray */
+
+    /* Primary Colors */
+    --color-primary: #2D5A27; /* deep forest green */
+    --color-primary-foreground: #FFFFFF; /* white */
+
+    /* Secondary Colors */
+    --color-secondary: #8B4513; /* rich soil brown */
+    --color-secondary-foreground: #FFFFFF; /* white */
+
+    /* Accent Colors */
+    --color-accent: #F4A460; /* golden harvest tone */
+    --color-accent-foreground: #1A1A1A; /* near-black */
+
+    /* Success Colors */
+    --color-success: #16A34A; /* vibrant green */
+    --color-success-foreground: #FFFFFF; /* white */
+
+    /* Warning Colors */
+    --color-warning: #D97706; /* amber orange */
+    --color-warning-foreground: #FFFFFF; /* white */
+
+    /* Error/Destructive Colors */
+    --color-error: #DC2626; /* clear red */
+    --color-error-foreground: #FFFFFF; /* white */
+    --color-destructive: #DC2626; /* clear red */
+    --color-destructive-foreground: #FFFFFF; /* white */
+  }
+
+  .dark {
+    /* Core Colors - Black Theme */
+    --color-background: #000000; /* pure black */
+    --color-foreground: #FAFAF9; /* warm off-white */
+    --color-border: #2D2D2D; /* dark gray */
+    --color-input: #1A1A1A; /* near-black */
+    --color-ring: #4CAF50; /* bright green */
+
+    /* Card Colors */
+    --color-card: #1A1A1A; /* near-black */
+    --color-card-foreground: #FAFAF9; /* warm off-white */
+
+    /* Popover Colors */
+    --color-popover: #1A1A1A; /* near-black */
+    --color-popover-foreground: #FAFAF9; /* warm off-white */
+
+    /* Muted Colors */
+    --color-muted: #1F1F1F; /* dark gray */
+    --color-muted-foreground: #9CA3AF; /* medium gray */
+
+    /* Primary Colors - Brighter green for dark bg */
+    --color-primary: #4CAF50; /* bright forest green */
+    --color-primary-foreground: #000000; /* black */
+
+    /* Secondary Colors */
+    --color-secondary: #A0522D; /* lighter soil brown */
+    --color-secondary-foreground: #FFFFFF; /* white */
+
+    /* Accent Colors */
+    --color-accent: #FFB347; /* bright golden harvest */
+    --color-accent-foreground: #000000; /* black */
+
+    /* Success Colors */
+    --color-success: #22C55E; /* bright green */
+    --color-success-foreground: #000000; /* black */
+
+    /* Warning Colors */
+    --color-warning: #F59E0B; /* bright amber */
+    --color-warning-foreground: #000000; /* black */
+
+    /* Error/Destructive Colors */
+    --color-error: #EF4444; /* bright red */
+    --color-error-foreground: #FFFFFF; /* white */
+    --color-destructive: #EF4444; /* bright red */
+    --color-destructive-foreground: #FFFFFF; /* white */
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer utilities {
+  .font-heading {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-body {
+    font-family: 'Source Sans 3', sans-serif;
+  }
+  
+  .font-caption {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .font-data {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
