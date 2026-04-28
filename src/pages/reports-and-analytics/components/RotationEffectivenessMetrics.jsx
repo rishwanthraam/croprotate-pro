@@ -47,11 +47,10 @@ const RotationEffectivenessMetrics = ({ data, isLoading }) => {
                 cx="50%"
                 cy="50%"
                 labelLine={false}
-                label={({ name, percent }) => `${(percent * 100)?.toFixed(0)}%`}
-                outerRadius={70}
+                label={({ name, percent }) => `${name} ${(percent * 100)?.toFixed(0)}%`}
+                outerRadius={80}
                 fill="#8884d8"
                 dataKey="value"
-                fontSize={10}
               >
                 {data?.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS?.[index % COLORS?.length]} />
@@ -70,16 +69,16 @@ const RotationEffectivenessMetrics = ({ data, isLoading }) => {
         </div>
 
         {/* Metrics List */}
-        <div className="space-y-2">
+        <div className="space-y-4">
           {data?.map((item, index) => (
-            <div key={item?.name} className="flex items-center justify-between p-2 bg-muted/50 rounded-lg">
-              <div className="flex items-center space-x-2">
-                <div
-                  className="w-3 h-3 rounded-full"
+            <div key={item?.name} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
+              <div className="flex items-center space-x-3">
+                <div 
+                  className="w-4 h-4 rounded-full"
                   style={{ backgroundColor: COLORS?.[index % COLORS?.length] }}
                 />
                 <div>
-                  <div className="font-medium text-xs text-foreground">{item?.name}</div>
+                  <div className="font-medium text-sm text-foreground">{item?.name}</div>
                   <div className="text-xs text-muted-foreground">{item?.description}</div>
                 </div>
               </div>
@@ -87,6 +86,7 @@ const RotationEffectivenessMetrics = ({ data, isLoading }) => {
                 <div className="font-data font-semibold text-sm text-foreground">
                   {item?.value}%
                 </div>
+                <div className="text-xs text-muted-foreground">success rate</div>
               </div>
             </div>
           ))}

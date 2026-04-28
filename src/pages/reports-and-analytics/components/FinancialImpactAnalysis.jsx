@@ -64,46 +64,43 @@ const FinancialImpactAnalysis = ({ data, isLoading, totalRevenue, totalCosts, ne
         </div>
       </div>
       {/* Area Chart */}
-      <div className="w-full h-64" aria-label="Financial Impact Area Chart">
+      <div className="w-full h-80" aria-label="Financial Impact Area Chart">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data} margin={{ top: 10, right: 10, left: 10, bottom: 20 }}>
+          <AreaChart data={data} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
             <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" />
-            <XAxis
-              dataKey="month"
+            <XAxis 
+              dataKey="month" 
               stroke="var(--color-muted-foreground)"
-              fontSize={10}
-              tickLine={false}
+              fontSize={12}
             />
-            <YAxis
+            <YAxis 
               stroke="var(--color-muted-foreground)"
-              fontSize={10}
-              tickLine={false}
-              width={50}
+              fontSize={12}
+              label={{ value: 'Amount ($)', angle: -90, position: 'insideLeft' }}
             />
-            <Tooltip
+            <Tooltip 
               contentStyle={{
                 backgroundColor: 'var(--color-popover)',
                 border: '1px solid var(--color-border)',
                 borderRadius: '8px',
-                fontSize: '11px'
+                fontSize: '12px'
               }}
               formatter={(value) => [`$${value?.toLocaleString()}`, '']}
             />
-            <Legend wrapperStyle={{ fontSize: '10px', paddingTop: '10px' }} />
-            <Area
-              type="monotone"
-              dataKey="revenue"
+            <Area 
+              type="monotone" 
+              dataKey="revenue" 
               stackId="1"
-              stroke="var(--color-success)"
+              stroke="var(--color-success)" 
               fill="var(--color-success)"
               fillOpacity={0.6}
               name="Revenue"
             />
-            <Area
-              type="monotone"
-              dataKey="costs"
+            <Area 
+              type="monotone" 
+              dataKey="costs" 
               stackId="2"
-              stroke="var(--color-warning)"
+              stroke="var(--color-warning)" 
               fill="var(--color-warning)"
               fillOpacity={0.6}
               name="Costs"
