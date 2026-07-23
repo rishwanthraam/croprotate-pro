@@ -2,6 +2,7 @@ import React from "react";
 import { HashRouter, Routes as RouterRoutes, Route } from "react-router-dom";
 import ScrollToTop from "components/ScrollToTop";
 import ErrorBoundary from "components/ErrorBoundary";
+import ProtectedRoute from "components/ProtectedRoute";
 import NotFound from "pages/NotFound";
 import ReportsAndAnalytics from './pages/reports-and-analytics';
 import SoilHealthMonitoring from './pages/soil-health-monitoring';
@@ -20,18 +21,21 @@ const Routes = () => {
       <ErrorBoundary>
       <ScrollToTop />
       <RouterRoutes>
-        {/* Define your route here */}
-        <Route path="/" element={<CropRotationPlanner />} />
-        <Route path="/reports-and-analytics" element={<ReportsAndAnalytics />} />
-        <Route path="/soil-health-monitoring" element={<SoilHealthMonitoring />} />
+        {/* Public routes */}
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/settings" element={<SettingsPage />} />
-        <Route path="/help" element={<HelpPage />} />
-        <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/crop-rotation-planner" element={<CropRotationPlanner />} />
         <Route path="/register" element={<Register />} />
         <Route path="/about" element={<About />} />
+
+        {/* Protected routes - require real login */}
+        <Route path="/" element={<ProtectedRoute><CropRotationPlanner /></ProtectedRoute>} />
+        <Route path="/reports-and-analytics" element={<ProtectedRoute><ReportsAndAnalytics /></ProtectedRoute>} />
+        <Route path="/soil-health-monitoring" element={<ProtectedRoute><SoilHealthMonitoring /></ProtectedRoute>} />
+        <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+        <Route path="/settings" element={<ProtectedRoute><SettingsPage /></ProtectedRoute>} />
+        <Route path="/help" element={<ProtectedRoute><HelpPage /></ProtectedRoute>} />
+        <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
+        <Route path="/crop-rotation-planner" element={<ProtectedRoute><CropRotationPlanner /></ProtectedRoute>} />
+
         <Route path="*" element={<NotFound />} />
       </RouterRoutes>
       </ErrorBoundary>

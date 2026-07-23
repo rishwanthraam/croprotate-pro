@@ -8,9 +8,11 @@ import FarmInformationStep from './components/FarmInformationStep';
 import PreferencesStep from './components/PreferencesStep';
 import TrustElements from './components/TrustElements';
 import NavigationButtons from './components/NavigationButtons';
+import { useAuth } from '../../context/AuthContext';
 
 const Register = () => {
   const navigate = useNavigate();
+  const { signUp } = useAuth();
   const [currentStep, setCurrentStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
@@ -131,9 +133,9 @@ const Register = () => {
         if (!formData?.city?.trim()) newErrors.city = 'City is required';
         if (!formData?.state) newErrors.state = 'State is required';
         if (!formData?.zipCode?.trim()) {
-          newErrors.zipCode = 'ZIP code is required';
-        } else if (!/^\d{5}(-\d{4})?$/?.test(formData?.zipCode)) {
-          newErrors.zipCode = 'Please enter a valid ZIP code';
+          newErrors.zipCode = 'Pin code is required';
+        } else if (!/^\d{6}$/?.test(formData?.zipCode)) {
+          newErrors.zipCode = 'Please enter a valid 6-digit PIN code';
         }
         if (!formData?.farmSize) newErrors.farmSize = 'Farm size is required';
         if (!formData?.primaryCrops?.length) newErrors.primaryCrops = 'Please select at least one crop';
@@ -165,18 +167,32 @@ const Register = () => {
     if (!validateStep(currentStep)) return;
 
     setIsLoading(true);
-    
+
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Clear saved registration data
+      const { error } = await signUp(formData?.email, formData?.password, {
+        first_name: formData?.firstName,
+        last_name: formData?.lastName,
+        user_type: formData?.userType,
+        farm_name: formData?.farmName,
+        city: formData?.city,
+        state: formData?.state,
+        zip_code: formData?.zipCode,
+        farm_size: formData?.farmSize,
+        primary_crops: formData?.primaryCrops,
+        measurement_units: formData?.measurementUnits
+      });
+
+      if (error) {
+        setErrors({ submit: error.message });
+        return;
+      }
+
+      // Clear saved draft registration data
       localStorage.removeItem('cropRotateRegistration');
-      
-      // Mock successful registration
-      console.log('Registration successful:', formData);
-      
-      // Navigate to dashboard
+
+      // Supabase sends a confirmation email by default. Depending on your
+      // project's auth settings, the user may need to verify email before
+      // being able to sign in, or may be signed in immediately.
       navigate('/dashboard');
     } catch (error) {
       console.error('Registration error:', error);

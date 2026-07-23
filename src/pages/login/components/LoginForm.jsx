@@ -3,9 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../../../components/ui/Button';
 import Input from '../../../components/ui/Input';
 import Icon from '../../../components/AppIcon';
+import { useAuth } from '../../../context/AuthContext';
 
-const LoginForm = ({ onLogin }) => {
+const LoginForm = () => {
   const navigate = useNavigate();
+  const { signIn } = useAuth();
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -13,20 +15,13 @@ const LoginForm = ({ onLogin }) => {
   const [errors, setErrors] = useState({});
   const [isLoading, setIsLoading] = useState(false);
 
-  // Mock credentials for demonstration
-  const mockCredentials = {
-    email: 'farmer@croprotate.com',
-    password: 'harvest2024'
-  };
-
   const handleInputChange = (e) => {
     const { name, value } = e?.target;
     setFormData(prev => ({
       ...prev,
       [name]: value
     }));
-    
-    // Clear error when user starts typing
+
     if (errors?.[name]) {
       setErrors(prev => ({
         ...prev,
@@ -56,7 +51,7 @@ const LoginForm = ({ onLogin }) => {
 
   const handleSubmit = async (e) => {
     e?.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -64,26 +59,14 @@ const LoginForm = ({ onLogin }) => {
     setIsLoading(true);
 
     try {
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1500));
+      const { error } = await signIn(formData?.email, formData?.password);
 
-      // Check mock credentials
-      if (formData?.email === mockCredentials?.email && formData?.password === mockCredentials?.password) {
-        const userData = {
-          id: 1,
-          name: 'Rishwanth',
-          email: formData?.email,
-          role: 'Farm Manager',
-          farmName: 'Rishwanth Farm',
-          location: 'Iowa, USA'
-        };
-        
-        onLogin?.(userData);
-        navigate('/dashboard');
-      } else {
+      if (error) {
         setErrors({
-          general: `Invalid credentials. Use email: ${mockCredentials?.email} and password: ${mockCredentials?.password}`
+          general: error.message
         });
+      } else {
+        navigate('/dashboard');
       }
     } catch (error) {
       setErrors({
@@ -94,9 +77,18 @@ const LoginForm = ({ onLogin }) => {
     }
   };
 
-  const handleForgotPassword = () => {
-    // Mock forgot password functionality
-    alert('Password reset link would be sent to your email address.');
+  const handleForgotPassword = async () => {
+    if (!formData?.email) {
+      setErrors({ general: 'Enter your email address above first, then click "Forgot your password?"' });
+      return;
+    }
+    const { supabase } = await import('../../../lib/supabase');
+    const { error } = await supabase.auth.resetPasswordForEmail(formData?.email);
+    if (error) {
+      setErrors({ general: error.message });
+    } else {
+      alert('Password reset link sent to your email address.');
+    }
   };
 
   return (
@@ -117,7 +109,6 @@ const LoginForm = ({ onLogin }) => {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-6">
-          {/* General Error */}
           {errors?.general && (
             <div className="bg-error/10 border border-error/20 rounded-lg p-4">
               <div className="flex items-start space-x-3">
@@ -129,7 +120,6 @@ const LoginForm = ({ onLogin }) => {
             </div>
           )}
 
-          {/* Email Field */}
           <Input
             label="Email Address"
             type="email"
@@ -142,7 +132,6 @@ const LoginForm = ({ onLogin }) => {
             disabled={isLoading}
           />
 
-          {/* Password Field */}
           <Input
             label="Password"
             type="password"
@@ -155,7 +144,6 @@ const LoginForm = ({ onLogin }) => {
             disabled={isLoading}
           />
 
-          {/* Submit Button */}
           <Button
             type="submit"
             variant="default"

@@ -38,12 +38,14 @@ const DateRangeFilter = ({
           label="Start Date"
           value={startDate}
           onChange={(e) => onStartDateChange(e?.target?.value)}
+          className="[color-scheme:dark] cursor-pointer"
         />
         <Input
           type="date"
           label="End Date"
           value={endDate}
           onChange={(e) => onEndDateChange(e?.target?.value)}
+          className="[color-scheme:dark] cursor-pointer"
         />
       </div>
     </div>

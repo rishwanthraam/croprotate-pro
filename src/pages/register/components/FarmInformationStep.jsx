@@ -16,37 +16,65 @@ const FarmInformationStep = ({ formData, onUpdate, errors }) => {
   ];
 
   const cropOptions = [
-    { value: 'corn', label: 'Corn', description: 'Zea mays' },
-    { value: 'soybeans', label: 'Soybeans', description: 'Glycine max' },
-    { value: 'wheat', label: 'Wheat', description: 'Triticum aestivum' },
-    { value: 'cotton', label: 'Cotton', description: 'Gossypium' },
     { value: 'rice', label: 'Rice', description: 'Oryza sativa' },
-    { value: 'barley', label: 'Barley', description: 'Hordeum vulgare' },
-    { value: 'oats', label: 'Oats', description: 'Avena sativa' },
+    { value: 'wheat', label: 'Wheat', description: 'Triticum aestivum' },
+    { value: 'sugarcane', label: 'Sugarcane', description: 'Saccharum officinarum' },
+    { value: 'cotton', label: 'Cotton', description: 'Gossypium' },
+    { value: 'maize', label: 'Maize (Corn)', description: 'Zea mays' },
+    { value: 'groundnut', label: 'Groundnut (Peanut)', description: 'Arachis hypogaea' },
+    { value: 'soybeans', label: 'Soybeans', description: 'Glycine max' },
+    { value: 'millet', label: 'Millet (Bajra/Jowar)', description: 'Pennisetum glaucum' },
+    { value: 'chickpea', label: 'Chickpea (Chana)', description: 'Cicer arietinum' },
+    { value: 'pigeon-pea', label: 'Pigeon Pea (Tur/Arhar)', description: 'Cajanus cajan' },
+    { value: 'mustard', label: 'Mustard', description: 'Brassica juncea' },
+    { value: 'turmeric', label: 'Turmeric', description: 'Curcuma longa' },
+    { value: 'chili', label: 'Chili Pepper', description: 'Capsicum annuum' },
+    { value: 'banana', label: 'Banana', description: 'Musa' },
     { value: 'sunflower', label: 'Sunflower', description: 'Helianthus annuus' },
-    { value: 'canola', label: 'Canola', description: 'Brassica napus' },
-    { value: 'alfalfa', label: 'Alfalfa', description: 'Medicago sativa' },
+    { value: 'barley', label: 'Barley', description: 'Hordeum vulgare' },
     { value: 'tomatoes', label: 'Tomatoes', description: 'Solanum lycopersicum' },
     { value: 'potatoes', label: 'Potatoes', description: 'Solanum tuberosum' },
-    { value: 'carrots', label: 'Carrots', description: 'Daucus carota' },
-    { value: 'lettuce', label: 'Lettuce', description: 'Lactuca sativa' },
-    { value: 'onions', label: 'Onions', description: 'Allium cepa' }
+    { value: 'onions', label: 'Onions', description: 'Allium cepa' },
+    { value: 'jute', label: 'Jute', description: 'Corchorus' }
   ];
 
   const stateOptions = [
-    { value: 'AL', label: 'Alabama' },
-    { value: 'CA', label: 'California' },
-    { value: 'FL', label: 'Florida' },
-    { value: 'GA', label: 'Georgia' },
-    { value: 'IL', label: 'Illinois' },
-    { value: 'IN', label: 'Indiana' },
-    { value: 'IA', label: 'Iowa' },
-    { value: 'KS', label: 'Kansas' },
-    { value: 'KY', label: 'Kentucky' },
-    { value: 'MN', label: 'Minnesota' },
-    { value: 'NE', label: 'Nebraska' },
-    { value: 'OH', label: 'Ohio' },
-    { value: 'TX', label: 'Texas' }
+    { value: 'AN', label: 'Andaman and Nicobar Islands' },
+    { value: 'AP', label: 'Andhra Pradesh' },
+    { value: 'AR', label: 'Arunachal Pradesh' },
+    { value: 'AS', label: 'Assam' },
+    { value: 'BR', label: 'Bihar' },
+    { value: 'CH', label: 'Chandigarh' },
+    { value: 'CT', label: 'Chhattisgarh' },
+    { value: 'DN', label: 'Dadra and Nagar Haveli and Daman and Diu' },
+    { value: 'DL', label: 'Delhi' },
+    { value: 'GA', label: 'Goa' },
+    { value: 'GJ', label: 'Gujarat' },
+    { value: 'HR', label: 'Haryana' },
+    { value: 'HP', label: 'Himachal Pradesh' },
+    { value: 'JK', label: 'Jammu and Kashmir' },
+    { value: 'JH', label: 'Jharkhand' },
+    { value: 'KA', label: 'Karnataka' },
+    { value: 'KL', label: 'Kerala' },
+    { value: 'LA', label: 'Ladakh' },
+    { value: 'LD', label: 'Lakshadweep' },
+    { value: 'MP', label: 'Madhya Pradesh' },
+    { value: 'MH', label: 'Maharashtra' },
+    { value: 'MN', label: 'Manipur' },
+    { value: 'ML', label: 'Meghalaya' },
+    { value: 'MZ', label: 'Mizoram' },
+    { value: 'NL', label: 'Nagaland' },
+    { value: 'OR', label: 'Odisha' },
+    { value: 'PY', label: 'Puducherry' },
+    { value: 'PB', label: 'Punjab' },
+    { value: 'RJ', label: 'Rajasthan' },
+    { value: 'SK', label: 'Sikkim' },
+    { value: 'TN', label: 'Tamil Nadu' },
+    { value: 'TG', label: 'Telangana' },
+    { value: 'TR', label: 'Tripura' },
+    { value: 'UP', label: 'Uttar Pradesh' },
+    { value: 'UT', label: 'Uttarakhand' },
+    { value: 'WB', label: 'West Bengal' }
   ];
 
   const handlePrimaryCropsChange = (selectedCrops) => {
@@ -99,9 +127,9 @@ const FarmInformationStep = ({ formData, onUpdate, errors }) => {
         />
       </div>
       <Input
-        label="ZIP Code"
+        label="PIN Code"
         type="text"
-        placeholder="Enter ZIP code"
+        placeholder="Enter 6-digit PIN code"
         description="Used for weather data and regional recommendations"
         value={formData?.zipCode || ''}
         onChange={(e) => onUpdate({ zipCode: e?.target?.value })}
